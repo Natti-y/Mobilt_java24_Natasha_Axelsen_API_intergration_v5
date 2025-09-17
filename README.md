@@ -1,15 +1,43 @@
-# WeatherApp – API Report
+# Mobilt_java24_DittNamn_API_intergration_v5
 
-This application integrates with the **OpenWeather API** (https://openweathermap.org/) to fetch real-time weather data. The API provides structured JSON responses containing valuable information such as temperature, weather conditions, humidity, wind speed, and weather icons.
+## Description
+In this project I have created a weather application where users can log in, search for a city or coordinates, and then see the current weather. The app integrates with the **OpenWeather REST API** to fetch real-time weather data. The user can choose whether to search by city name or latitude/longitude through the settings screen.
 
-We use two main endpoints from the API:
-- **`/weather?q={city}`** – fetches the current weather for a given city name.  
-- **`/weather?lat={lat}&lon={lon}`** – fetches the current weather based on geographic coordinates.  
+The project follows a multi-fragment structure with proper backstack navigation. The UI adapts to both **portrait and landscape** orientation. All code is written in **Kotlin**.
 
-The app communicates with the API using **Retrofit**, a popular HTTP client for Kotlin and Android. When the user inputs either a city name or latitude/longitude values, the app sends an asynchronous request to the API. Retrofit handles the parsing of the JSON response into Kotlin **data classes**.
+---
 
-The data is then exposed to the UI through a **ViewModel** using **StateFlow**. The ViewModel ensures that network operations happen on background threads, while the UI remains responsive. Depending on the result, the app updates the UI with either weather information or an error message.
+## Functionality
+- Login screen with shared preferences to save session  
+- Search screen where the user enters city name or coordinates  
+- Weather details fetched from OpenWeather API  
+- Displays temperature, description, humidity, wind speed and icon  
+- Switch in settings to choose between “City” or “Coordinates” mode  
+- Logout clears preferences and returns to login screen  
 
-For example, a request such as `/weather?q=Stockholm&appid=API_KEY` returns JSON with fields like `main.temp`, `weather[0].description`, and `weather[0].icon`. This data is displayed in the app: temperature in Celsius, textual weather description, and an icon (fetched from OpenWeather’s image resources).
+---
 
-This integration ensures the application provides **real-time, valuable, and user-friendly weather information** to the end user.
+## API Integration
+I used the **OpenWeather API** (https://openweathermap.org/).  
+Endpoints:  
+- `/weather?q={city}&appid={API_KEY}` – fetch weather by city name  
+- `/weather?lat={lat}&lon={lon}&appid={API_KEY}` – fetch weather by coordinates  
+
+The responses are parsed with **Retrofit** into Kotlin data classes. The data is exposed through a **ViewModel** using StateFlow and displayed in the UI with temperature in Celsius, weather description, and a weather icon.
+
+---
+
+## Setup/Installation Requirements
+1. Clone the repo  
+2. Open in Android Studio  
+3. Add your OpenWeather `API_KEY` in `ApiClient.kt`  
+4. Build & run on an emulator or device  
+
+---
+
+## Project Features
+- 4 fragments: Login, Home, Search, Details (+ Settings)  
+- Backstack navigation implemented with Navigation Component  
+- API data fetched with Retrofit and displayed in UI  
+- Orientation support (portrait & landscape)  
+- Kotlin only implementation  
